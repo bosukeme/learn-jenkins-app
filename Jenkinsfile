@@ -3,7 +3,6 @@ pipeline {
 
     stages {
         stage('Build') {
-            
             agent {
                 docker {
                     image 'node:18-alpine'
@@ -20,6 +19,13 @@ pipeline {
                     ls -la
                 '''
             }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'test -f build/index.html'
+            }
+            
         }
     }
 }
